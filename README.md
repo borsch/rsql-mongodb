@@ -2,7 +2,7 @@
 This library has been superseded by the more general (and just better) [rest-query-engine](https://github.com/rutledgepaulv/rest-query-engine).
 
 
-[![Build Status](https://travis-ci.org/RutledgePaulV/rsql-mongodb.svg)](https://travis-ci.org/RutledgePaulV/rsql-mongodb)
+![Java CI with Maven](https://github.com/borsch/rsql-mongodb/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master)
 
 ### What
 
