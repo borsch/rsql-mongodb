@@ -1,12 +1,12 @@
 package com.rutledgepaulv.github.utils;
 
-import com.rutledgepaulv.github.structs.Lazy;
-
 import java.util.List;
 
-public final class LazyUtils {
-    private LazyUtils(){}
+import com.rutledgepaulv.github.structs.Lazy;
 
+public final class LazyUtils {
+
+    private LazyUtils() {}
 
     public static <T> T firstThatReturnsNonNull(List<Lazy<T>> lazies) {
         for(Lazy<T> lazy : lazies) {
@@ -17,6 +17,5 @@ public final class LazyUtils {
         }
         return null;
     }
-
 
 }

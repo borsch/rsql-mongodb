@@ -7,10 +7,10 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.2.5.RELEASE</version>
+        <version>2.3.2.RELEASE</version>
     </parent>
 
-    <groupId>com.rutledgepaulv.github</groupId>
+    <groupId>com.borsch.github</groupId>
     <artifactId>rsql-mongodb</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -18,6 +18,10 @@
         <developer>
             <name>Paul Rutledge</name>
             <email>paul.v.rutledge@gmail.com</email>
+        </developer>
+        <developer>
+            <name>Oleh Kurpiak</name>
+            <email>oleh.kurpiak@gmail.com</email>
         </developer>
     </developers>
 
@@ -29,42 +33,33 @@
     </licenses>
 
     <scm>
-        <url>http://github.com/rutledgepaulv/rsql-mongodb</url>
-        <connection>scm:git:git@github.com:rutledgepaulv/rsql-mongodb.git</connection>
+        <url>http://github.com/borsch/rsql-mongodb</url>
+        <connection>scm:git:git@github.com:borsch/rsql-mongodb.git</connection>
     </scm>
-
-    <ciManagement>
-        <system>travis</system>
-        <url>https://travis-ci.org/rutledgepaulv/rsql-mongodb</url>
-    </ciManagement>
 
     <issueManagement>
         <system>github</system>
-        <url>https://github.com/rutledgepaulv/rsql-mongodb/issues</url>
+        <url>https://github.com/borsch/rsql-mongodb/issues</url>
     </issueManagement>
-    
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
-
     <dependencies>
-
-        <!-- REAL DEPS -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
-
         <dependency>
             <groupId>cz.jirutka.rsql</groupId>
             <artifactId>rsql-parser</artifactId>
-            <version>2.0.0</version>
+            <version>2.1.0</version>
         </dependency>
-
-
-        <!-- TEST DEPS -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -74,40 +69,10 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>29.0-jre</version>
             <scope>test</scope>
         </dependency>
 
     </dependencies>
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <layout>NONE</layout>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-    <repositories>
-        <repository>
-            <id>spring-releases</id>
-            <name>Spring Releases</name>
-            <url>https://repo.spring.io/libs-release</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>spring-releases</id>
-            <name>Spring Releases</name>
-            <url>https://repo.spring.io/libs-release</url>
-        </pluginRepository>
-    </pluginRepositories>
-
 
 </project>

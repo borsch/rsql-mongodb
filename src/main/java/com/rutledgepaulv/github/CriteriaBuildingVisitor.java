@@ -1,15 +1,21 @@
 package com.rutledgepaulv.github;
 
-import cz.jirutka.rsql.parser.ast.*;
-import org.springframework.data.mongodb.core.query.Criteria;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+
+import cz.jirutka.rsql.parser.ast.AndNode;
+import cz.jirutka.rsql.parser.ast.ComparisonNode;
+import cz.jirutka.rsql.parser.ast.LogicalNode;
+import cz.jirutka.rsql.parser.ast.NoArgRSQLVisitorAdapter;
+import cz.jirutka.rsql.parser.ast.Node;
+import cz.jirutka.rsql.parser.ast.OrNode;
+
 public class CriteriaBuildingVisitor extends NoArgRSQLVisitorAdapter<Criteria> {
 
-    private ComparisonToCriteriaConverter converter;
-    private Class<?> targetEntityType;
+    private final ComparisonToCriteriaConverter converter;
+    private final Class<?> targetEntityType;
 
     public CriteriaBuildingVisitor(ComparisonToCriteriaConverter converter, Class<?> targetEntity) {
         this.converter = converter;
@@ -20,14 +26,14 @@ public class CriteriaBuildingVisitor extends NoArgRSQLVisitorAdapter<Criteria> {
     public Criteria visit(AndNode node) {
         Criteria parent = new Criteria();
         List<Criteria> children = getChildCriteria(node);
-        return parent.andOperator(children.toArray(new Criteria[children.size()]));
+        return parent.andOperator(children.toArray(new Criteria[0]));
     }
 
     @Override
     public Criteria visit(OrNode node) {
         Criteria parent = new Criteria();
         List<Criteria> children = getChildCriteria(node);
-        return parent.orOperator(children.toArray(new Criteria[children.size()]));
+        return parent.orOperator(children.toArray(new Criteria[0]));
     }
 
     @Override

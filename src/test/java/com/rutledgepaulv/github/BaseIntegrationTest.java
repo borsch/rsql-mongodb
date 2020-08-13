@@ -1,7 +1,7 @@
 package com.rutledgepaulv.github;
 
-import com.google.common.reflect.TypeToken;
-import com.mongodb.DBObject;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +14,25 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.function.Consumer;
-
-import static org.junit.Assert.assertEquals;
+import com.google.common.reflect.TypeToken;
 
 @SuppressWarnings("unchecked")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = BaseIntegrationTest.TestApplication.class)
 public abstract class BaseIntegrationTest<T> {
 
-    protected Class<T> CLAZZ = (Class<T>)(new TypeToken<T>(getClass()){}).getRawType();
-    protected RsqlMongoAdapter adapter;
+    private static final ConversionService CONVERSION_SERVICE = new DefaultConversionService();
+
+    private final Class<T> CLAZZ = (Class<T>)(new TypeToken<T>(getClass()){}).getRawType();
+    private RsqlMongoAdapter adapter;
 
     @Autowired
-    protected MongoMappingContext mongoMappingContext;
+    private MongoMappingContext mongoMappingContext;
 
-    protected ConversionService conversionService = new DefaultConversionService();
 
     @Before
     public void setUp() {
-        ComparisonToCriteriaConverter converter = new ComparisonToCriteriaConverter(conversionService, mongoMappingContext);
+        ComparisonToCriteriaConverter converter = new ComparisonToCriteriaConverter(CONVERSION_SERVICE, mongoMappingContext);
         adapter = new RsqlMongoAdapter(converter);
     }
 
@@ -42,11 +41,7 @@ public abstract class BaseIntegrationTest<T> {
     }
 
     protected void check(String rsql, String mongo) {
-        assertEquals(mongo, query(rsql).getQueryObject().toString());
-    }
-
-    protected void check(String rsql, Consumer<DBObject> consumer) {
-        consumer.accept(query(rsql).getQueryObject());
+        assertEquals(mongo, query(rsql).getQueryObject().toJson());
     }
 
     @SpringBootApplication

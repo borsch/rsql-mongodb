@@ -1,16 +1,19 @@
 package com.rutledgepaulv.github.argconverters;
 
-import com.rutledgepaulv.github.structs.ConversionInfo;
-import com.rutledgepaulv.github.structs.Lazy;
+import java.util.Objects;
+
 import org.springframework.core.convert.ConversionService;
-import org.springframework.data.mapping.context.PersistentPropertyPath;
+import org.springframework.data.mapping.PersistentPropertyPath;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import org.springframework.data.mongodb.core.mapping.MongoPersistentProperty;
 
+import com.rutledgepaulv.github.structs.ConversionInfo;
+import com.rutledgepaulv.github.structs.Lazy;
+
 public class EntityFieldTypeConverter implements StringToQueryValueConverter {
 
-    private ConversionService conversionService;
-    private MongoMappingContext mongoMappingContext;
+    private final ConversionService conversionService;
+    private final MongoMappingContext mongoMappingContext;
 
     public EntityFieldTypeConverter(ConversionService conversionService, MongoMappingContext mappingContext) {
         this.conversionService = conversionService;
@@ -24,11 +27,11 @@ public class EntityFieldTypeConverter implements StringToQueryValueConverter {
             PersistentPropertyPath<MongoPersistentProperty> property
                     = mongoMappingContext.getPersistentPropertyPath(info.getPathToField(), info.getTargetEntityClass());
 
-            MongoPersistentProperty leaf = property.getLeafProperty();
+            MongoPersistentProperty leaf = Objects.requireNonNull(property.getLeafProperty(), "Leaf can't be null");
 
-            Class<?> targetTypeDeterminedFromEntityField = null;
+            Class<?> targetTypeDeterminedFromEntityField;
 
-            if(leaf.isCollectionLike()) {
+            if (leaf.isCollectionLike()) {
                 targetTypeDeterminedFromEntityField = leaf.getComponentType();
             } else {
                 targetTypeDeterminedFromEntityField = leaf.getType();

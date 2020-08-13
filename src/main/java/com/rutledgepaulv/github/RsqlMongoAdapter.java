@@ -1,16 +1,17 @@
 package com.rutledgepaulv.github;
 
-import cz.jirutka.rsql.parser.RSQLParser;
-import cz.jirutka.rsql.parser.ast.Node;
-import org.springframework.data.mongodb.core.query.Criteria;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+
+import cz.jirutka.rsql.parser.RSQLParser;
+import cz.jirutka.rsql.parser.ast.Node;
+
 public class RsqlMongoAdapter {
 
-    private ComparisonToCriteriaConverter converter;
-    private RSQLParser parser;
+    private final ComparisonToCriteriaConverter converter;
+    private final RSQLParser parser;
 
     public RsqlMongoAdapter(ComparisonToCriteriaConverter converter) {
         this.converter = converter;
