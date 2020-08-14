@@ -1,10 +1,10 @@
 package com.rutledgepaulv.github.models;
 
+import java.util.Calendar;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.util.Calendar;
 
 @Document(collection = "persons")
 public class Person {
@@ -16,6 +16,7 @@ public class Person {
     private int height;
     private String firstName;
     private String lastName;
+    private long date;
 
 
     // field annotations

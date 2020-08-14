@@ -21,14 +21,13 @@ import com.google.common.reflect.TypeToken;
 @ContextConfiguration(classes = BaseIntegrationTest.TestApplication.class)
 public abstract class BaseIntegrationTest<T> {
 
-    private static final ConversionService CONVERSION_SERVICE = new DefaultConversionService();
+    protected static final ConversionService CONVERSION_SERVICE = new DefaultConversionService();
 
-    private final Class<T> CLAZZ = (Class<T>)(new TypeToken<T>(getClass()){}).getRawType();
-    private RsqlMongoAdapter adapter;
+    protected final Class<T> CLAZZ = (Class<T>)(new TypeToken<T>(getClass()){}).getRawType();
+    protected RsqlMongoAdapter adapter;
 
     @Autowired
-    private MongoMappingContext mongoMappingContext;
-
+    protected MongoMappingContext mongoMappingContext;
 
     @Before
     public void setUp() {
