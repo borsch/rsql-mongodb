@@ -12,6 +12,16 @@ makes RSQL a natural choice for APIs that want to provide flexible querying and 
 
 
 ### How to use it
+
+Add maven dependency
+```xml
+<dependency>
+    <groupId>com.github.borsch</groupId>
+    <artifactId>rsql-mongodb</artifactId>
+    <version>1.1</version>
+</dependency>
+```
+
 ```java
 
 @Autowired
